@@ -1,18 +1,18 @@
 #!/bin/bash
 
-EXTENSION=$1
-UNTRACKED_FILES=$(git ls-files --others --exclude-standard | grep $EXTENSION)
-MODIFIED_FILES=$(git ls-files -m | grep $EXTENSION)
+EXTENSION=${1:?“🔴 Error: You must supply an Extenstion as first parameter.“}
+UNTRACKED_FILES=$(git ls-files --others --exclude-standard | grep ".*.${EXTENSION}$")
+MODIFIED_FILES=$(git ls-files -m | grep ".*.${EXTENSION}$")
 
-UNTRACKED_FILES_ERROR_MSG="Untracked files with extension $EXTENSION don't exist"
-MODIFIED_FILES_ERROR_MSG="Modified files with extension $EXTENSION don't exist"
+UNTRACKED_FILES_ERROR_MSG="🟡 Untracked files with extension $EXTENSION don't exist"
+MODIFIED_FILES_ERROR_MSG="🟡 Modified files with extension $EXTENSION don't exist"
 
 WARNING_UNTRACKED_MSG=
 WARNING_MODIFIED_MSG=
 
 if [[ $UNTRACKED_FILES ]]; then
     let COUNTER=0
-    LINE=$(git ls-files --others --exclude-standard | grep $EXTENSION | 
+    LINE=$(git ls-files --others --exclude-standard | grep ".*.${EXTENSION}$" | 
            while read UNTRACKED_FILE
            do 
                let "COUNTER+=1"
@@ -27,7 +27,7 @@ fi
 
 if [[ $MODIFIED_FILES ]]; then
     let COUNTER=0
-    LINE=$(git ls-files -m | grep $EXTENSION | 
+    LINE=$(git ls-files -m | grep grep ".*.${EXTENSION}$" | 
            while read MODIFIED_FILE
            do 
                let "COUNTER+=1"
