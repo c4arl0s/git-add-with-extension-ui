@@ -56,7 +56,7 @@ else
   error ${UNTRACKED_FILES_ERROR_MSG}
 fi
 
-if [[ ${modified_files} ]]; then
+if [[ -n ${modified_files} ]]; then
   let counter=0
   line=$(git ls-files -m | grep ".*.${extension}$" \
     | while read modified_file; do 
