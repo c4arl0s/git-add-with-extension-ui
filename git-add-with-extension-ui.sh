@@ -9,6 +9,10 @@ readonly UNTRACKED_FILES_ERROR_MSG='Untracked files with extension $extension do
 readonly MODIFIED_FILES_ERROR_MSG='Modified files with extension $extension dont exist'
 readonly ERROR_REPO='Current directory is not a git repository'
 
+untracked_msg="untracked files to add with extension (${extension}): " 
+modified_msg="modified files to add with extension (${extension}): " 
+success_msg="🟢 Selected files with extension ${extension} were added to stage area"
+
 warning_untracked_msg=
 warning_modified_msg=
 
@@ -47,10 +51,10 @@ if [[ -n ${untracked_files} ]]; then
         let "counter+=1"
         echo "\"${untracked_file}\" \"${counter}\" off"
       done)
-  selected_untracked_files=$(echo ${line} | xargs dialog --stdout --checklist "untracked files to add with extension (${extension}) :" 0 0 0)
+  selected_untracked_files=$(echo ${line} | xargs dialog --stdout --checklist ${untracked_msg} 0 0 0)
   [ -n "${selected_untracked_files}" ] \
     && echo ${selected_untracked_files} | xargs git add \
-    && echo "🟢 Selected files with extension ${extension} were added to stage area" \
+    && echo ${success_msg} \
     || warning_untracked_msg="You did not select any untracked file"
 else
   error ${UNTRACKED_FILES_ERROR_MSG}
@@ -63,10 +67,10 @@ if [[ -n ${modified_files} ]]; then
         let "counter+=1"
         echo "\"${modified_file}\" \"${counter}\" off"
       done)
-  selected_modified_files=$(echo ${line} | xargs dialog --stdout --checklist "modified files to add with extension (${extension}):" 0 0 0)
+  selected_modified_files=$(echo ${line} | xargs dialog --stdout --checklist ${modified_msg} 0 0 0)
   [ -n "${selected_modified_files}" ] \
     && echo ${selected_modified_files} | xargs git add \
-    && echo "🟢 Selected files with extension ${extension} were added to stage area" \
+    && echo ${success_msg} \
     || warning_modified_msg="You did not select any modified file"
 else
   error ${MODIFIED_FILES_ERROR_MSG}
