@@ -26,7 +26,7 @@ You can pass whatever extension in order to filter the group of files you want t
 ./git-add-with-filter-ui.sh txt
 ```
 
-<img width="1624" alt="Screenshot 2023-11-29 at 10 10 41 p m" src="https://github.com/c4arl0s/git-add-with-extension-ui/assets/24994818/c9c67b24-3b64-4967-b42e-36d3c55d83f8">
+<img width="423" alt="Screenshot 2024-01-07 at 12 40 53 p m" src="https://github.com/c4arl0s/git-add-with-extension-ui/assets/24994818/53b99c60-0103-486a-8d2b-e8a609e7cb2b">
 
 # [Code](https://github.com/c4arl0s/git-add-with-filter-ui#go-back-to-overview)
 
